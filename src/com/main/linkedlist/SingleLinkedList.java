@@ -71,4 +71,40 @@ public class SingleLinkedList {
 		}
 		return headNode;
 	}
+
+    public ListNode deleteNode(ListNode headNode, int position) {
+        int size = listLength(headNode);
+        if (position > size || position < 1) {
+            System.out.println("Position of node to delete is invalid."
+                    + " The value inputs are 1 to " + size);
+            return headNode;
+        }
+        
+        // [11] -> [22] -> [33]
+        if (position == 1) { // 리스트 가장 앞에서 삭제
+            ListNode currentNode = headNode.getNext();
+            headNode = null;
+            return currentNode;
+        } else {    // 끝에 닿을 때까지 내부에서 삭제
+            ListNode previousNode = headNode;
+            int count = 1;
+            while (count < position - 1) {
+                previousNode = previousNode.getNext();
+                count++;
+            }
+            ListNode currentNode = previousNode.getNext();
+            previousNode.setNext(currentNode.getNext());
+            currentNode = null;
+        }
+        return headNode;
+    }
+
+    public void deleteList(ListNode head) {
+        ListNode auxiliaryNode, iterator = head;
+        while (iterator != null) {
+            auxiliaryNode = iterator.getNext();
+            iterator = null;
+            iterator = auxiliaryNode;
+        }
+    }
 }
